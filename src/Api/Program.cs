@@ -13,9 +13,9 @@ namespace Api
     {
         public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
 
             var host = CreateHostBuilder(args).Build();
+
             using(var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -32,6 +32,8 @@ namespace Api
                     logger.LogError(ex, "マイグレーション中にエラーが発生しました");
                 }
             }
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
